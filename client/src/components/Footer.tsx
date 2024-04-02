@@ -4,7 +4,7 @@ import { FaTwitter } from "react-icons/fa";
 
 export const Footer = () => {
   return (
-    <div className="bg-[--mustard] border-t border-black">
+    <div className="bg-[--mustard]">
       <div className="h-[230px] flex justify-around items-start py-10 text-slate-700 max-w-[1300px] m-auto">
         <div className="flex flex-col gap-1">
           <h3 className="mb-2 text-black">INFO</h3>
@@ -25,9 +25,9 @@ export const Footer = () => {
             <div className="flex gap-3">
               <input
                 type="text"
-                className="black-shadow py-1 px-2 text-black"
+                className="black-shadow py-1 px-2 text-black border border-black"
               />
-              <button className="border border-black py-1 px-2 bg-white text-black">
+              <button className="border border-black py-1 px-2 bg-white text-black black-shadow">
                 Submit
               </button>
             </div>
