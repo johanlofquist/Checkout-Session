@@ -1,3 +1,30 @@
+import { useEffect, useState } from "react";
+import { getProducts } from "../services/stripeService";
+import { Product } from "../models/Product";
+import { RenderProduct } from "../components/RenderProduct";
+
 export const Shop = () => {
-    return <div>Shop!</div>
-}
+  const [products, setProducts] = useState<Product[]>();
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      const productsInStripe = await getProducts();
+      setProducts(productsInStripe.data);
+    };
+    loadProducts();
+  }, []);
+
+  return (
+    <div className="bg-[--mustard] flex flex-col justify-center items-center gap-10 py-20">
+      {products?.map((product) => (
+        <RenderProduct
+          key={product.id}
+          name={product.name}
+          description={product.description}
+          image={product.images[0]}
+          price={product.default_price.unit_amount}
+        />
+      ))}
+    </div>
+  );
+};

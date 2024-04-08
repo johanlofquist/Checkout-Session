@@ -65,7 +65,7 @@ export const SignIn = () => {
   };
 
   return (
-    <div className="bg-[--mustard] h-[850px] flex justify-center items-center gap-10">
+    <div className="bg-[--mustard] h-[550px] flex justify-center items-center gap-10">
       {isLoggedIn ? (
         <>
           <div className="bg-[#f2f2f2] border border-black black-shadow w-[350px] h-[400px] flex flex-col items-center justify-around relative gap-2">

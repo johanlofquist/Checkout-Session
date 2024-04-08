@@ -2,7 +2,7 @@ const express = require("express");
 const authRouter = require("./resources/auth/auth.router");
 const cookieSession = require("cookie-session");
 const cors = require("cors");
-
+const stripeRouter = require("./resources/stripe/stripe.router");
 const app = express();
 
 app.use(
@@ -20,5 +20,6 @@ app.use(
 );
 
 app.use("/api/auth", authRouter);
+app.use("/api/stripe", stripeRouter);
 
 app.listen(3000, () => console.log("Server is up and running!"));

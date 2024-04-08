@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
 import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { authorize } from "../services/userService";
 import { useUser } from "../context/UserContext";
 
 export const Layout = () => {
-  const { setLoggedInUser, isLoggedIn, user } = useUser();
+  const { setLoggedInUser } = useUser();
 
   useEffect(() => {
     const session = async () => {
