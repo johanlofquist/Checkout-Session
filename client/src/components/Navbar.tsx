@@ -34,7 +34,7 @@ export const Navbar = () => {
         <NavLink to="/signin" className="relative z-10">
           <div className="bg-black absolute w-[90px] h-[50px] top-[4px]"></div>
           <button className="bg-white w-[90px] h-[50px] relative top-[0px] border border-black text-xl active:top-[4px] transition-all">
-            SIGN IN
+            USER
           </button>
         </NavLink>
         <div className="relative">

@@ -1,19 +1,24 @@
 const express = require("express");
-const cors = require("cors");
+const authRouter = require("./resources/auth/auth.router");
 const cookieSession = require("cookie-session");
-const userRouter = require("./resources/users/users.router");
+const cors = require("cors");
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(
   cookieSession({
-    secret: "yolo",
+    secret: "y0l0y0l0y0l0",
     maxAge: 1000 * 60 * 60,
   })
 );
 
-app.use("/api/users", userRouter);
+app.use("/api/auth", authRouter);
 
 app.listen(3000, () => console.log("Server is up and running!"));

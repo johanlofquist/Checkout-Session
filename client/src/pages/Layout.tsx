@@ -1,8 +1,25 @@
 import { Outlet } from "react-router-dom";
 import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
+import { useEffect, useState } from "react";
+import { authorize } from "../services/userService";
+import { useUser } from "../context/UserContext";
 
 export const Layout = () => {
+  const { setLoggedInUser, isLoggedIn, user } = useUser();
+
+  useEffect(() => {
+    const session = async () => {
+      const response = await authorize();
+      if (response.status === 200) {
+        const sessionUser = {
+          email: response.data as string,
+        };
+        setLoggedInUser(sessionUser);
+      }
+    };
+    session();
+  }, []);
   return (
     <div className="">
       <nav className="">

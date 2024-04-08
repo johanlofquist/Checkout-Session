@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "email": "johan@gmail.com",
+    "password": "$2b$10$xF9qYhtQuKN3kzhi0uNDN.qCUmWLAdXe9h6tpY8PezEAvD5E15aOi"
+  },
+  {
+    "email": "josefine@gmail.com",
+    "password": "$2b$10$4JLbRHCh/zlurLmhzH9mA.cnqtpCYMR9O4BSVC9c/GQuZuGdCnIrO"
+  }
+]

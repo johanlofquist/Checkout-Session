@@ -3,7 +3,7 @@ import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { Layout } from "./pages/Layout";
 import { Shop } from "./pages/Shop";
-import { SignIn } from "./pages/SignIn";
+import { SignIn } from "./pages/User";
 
 export const router = createBrowserRouter([
   {
