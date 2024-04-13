@@ -4,6 +4,7 @@ import { NotFound } from "./pages/NotFound";
 import { Layout } from "./pages/Layout";
 import { Shop } from "./pages/Shop";
 import { SignIn } from "./pages/User";
+import { Success } from "./pages/Success";
 
 export const router = createBrowserRouter([
   {
@@ -19,12 +20,14 @@ export const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop />,
-        index: true,
       },
       {
         path: "/signin",
         element: <SignIn />,
-        index: true,
+      },
+      {
+        path: "/success",
+        element: <Success />,
       },
     ],
   },

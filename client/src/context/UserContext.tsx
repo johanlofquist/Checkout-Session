@@ -1,7 +1,7 @@
 import { PropsWithChildren, createContext, useContext, useState } from "react";
 import { ILoggedInUser } from "../models/loggedInUser";
 
-export interface IUserContext {
+interface IUserContext {
   user: ILoggedInUser | undefined;
   isLoggedIn: boolean;
   setLoggedInUser: (user: ILoggedInUser) => void;

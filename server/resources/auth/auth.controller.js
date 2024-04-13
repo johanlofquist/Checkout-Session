@@ -2,6 +2,7 @@ const checkIfUserExists = require("../../utils/checkIfUserExists");
 const fetchUsers = require("../../utils/fetchUsers");
 const saveUsers = require("../../utils/saveUsers");
 const bcrypt = require("bcrypt");
+const { createCustomerInStripe } = require("../stripe/stripe.controller");
 
 const createUser = async (req, res) => {
   let { email, password } = req.body;
@@ -11,11 +12,14 @@ const createUser = async (req, res) => {
   if (userExists) {
     return res.status(200).json("This email already exists");
   }
+
+  const customer = await createCustomerInStripe(email);
   const users = await fetchUsers();
   const hashedPassword = await bcrypt.hash(password, 10);
   const newUser = {
     email,
     password: hashedPassword,
+    stripeId: customer.id,
   };
 
   users.push(newUser);
@@ -42,7 +46,7 @@ const authorize = (req, res) => {
   if (!req.session.user) {
     return res.status(400).json("No session found");
   }
-  res.status(200).json(req.session.user.email);
+  res.status(200).json(req.session.user);
 };
 
 const logout = (req, res) => {

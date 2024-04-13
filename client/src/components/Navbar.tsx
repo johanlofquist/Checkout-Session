@@ -4,16 +4,20 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Cart } from "./Cart";
+import { useCart } from "../context/CartContext";
 
 export const Navbar = () => {
   const [isCartOpen, setIsOpen] = useState(false);
+  const { cart } = useCart();
 
   const toggleCart = () => {
     setIsOpen(!isCartOpen);
   };
   return (
     <>
-      <AnimatePresence>{isCartOpen ? <Cart /> : ""}</AnimatePresence>
+      <AnimatePresence>
+        {isCartOpen ? <Cart toggleCart={toggleCart} /> : ""}
+      </AnimatePresence>
       <div className="bg-[--mustard] w-full h-[150px] madimi-one-regular flex justify-center items-center">
         <img
           src={seal}
@@ -44,6 +48,13 @@ export const Navbar = () => {
             className="bg-white w-[90px] h-[50px] relative top-[0px] right-[0px] border border-black text-xl active:top-[4px] active:right-[3px] transition-all flex justify-center items-center"
           >
             <BsCart4 className="text-3xl" />
+            {cart.length > 0 ? (
+              <p className="absolute bg-black rounded-full p-1 text-white text-sm top-1 right-4 w-[25px] h-[25px]">
+                {cart.length}
+              </p>
+            ) : (
+              ""
+            )}
           </button>
         </div>
       </div>

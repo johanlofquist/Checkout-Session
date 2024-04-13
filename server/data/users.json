@@ -1,10 +1,12 @@
 [
   {
     "email": "johan@gmail.com",
-    "password": "$2b$10$xF9qYhtQuKN3kzhi0uNDN.qCUmWLAdXe9h6tpY8PezEAvD5E15aOi"
+    "password": "$2b$10$evwQIYnAOan68GRcrp3LoeyyVYhPGwXClosG/ZNdrbL73cnZ7ML8C",
+    "stripeId": "cus_PtRTwoext3OkbK"
   },
   {
     "email": "josefine@gmail.com",
-    "password": "$2b$10$4JLbRHCh/zlurLmhzH9mA.cnqtpCYMR9O4BSVC9c/GQuZuGdCnIrO"
+    "password": "$2b$10$mtzmSSuRMkWBiml1a9ZdNOvG53I7geFj99mysSQVSMyfrx.dclI1y",
+    "stripeId": "cus_PtWBzio7HUvAtA"
   }
 ]

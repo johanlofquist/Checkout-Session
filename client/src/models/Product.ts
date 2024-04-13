@@ -5,5 +5,6 @@ export interface Product {
     images: string[]
     default_price: {
         unit_amount: number
+        id: string
     }
 }

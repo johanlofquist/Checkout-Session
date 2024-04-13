@@ -1,18 +1,32 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { IUser } from "../models/User";
 import { login, logoutFromServer, saveUser } from "../services/userService";
 import { useUser } from "../context/UserContext";
 import { ILoggedInUser } from "../models/loggedInUser";
+import { getOrders } from "../services/orderService";
+import { Order } from "../models/Order";
+import { RenderOrder } from "../components/RenderOrder";
 
 export const SignIn = () => {
   const { isLoggedIn, user, setLoggedInUser, logout } = useUser();
-
   const [createEmailInput, setCreateEmailInput] = useState("");
   const [createPasswordInput, setCreatePasswordInput] = useState("");
   const [loginEmailInput, setLoginEmailInput] = useState("");
   const [loginPasswordInput, setLoginPasswordInput] = useState("");
   const [createAlert, setCreateAlert] = useState("");
   const [loginAlert, setLoginAlert] = useState("");
+  const [orders, setOrders] = useState<Order[]>([]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      const fetchOrders = async () => {
+        const response = await getOrders(user.email);
+        console.log(response);
+        setOrders(response);
+      };
+      fetchOrders();
+    }
+  }, [user]);
 
   const handleLogoutClick = async () => {
     logout();
@@ -65,12 +79,31 @@ export const SignIn = () => {
   };
 
   return (
-    <div className="bg-[--mustard] h-[550px] flex justify-center items-center gap-10">
+    <div className="bg-[--mustard] h-[750px] flex justify-center items-center gap-10">
       {isLoggedIn ? (
         <>
-          <div className="bg-[#f2f2f2] border border-black black-shadow w-[350px] h-[400px] flex flex-col items-center justify-around relative gap-2">
-            <h2 className="madimi-one-regular text-2xl">LOGGED IN AS</h2>
-            <div className="bg-white px-2 py-1 border border-black black-shadow mt-2">{user?.email}</div>
+          <div className="bg-[#f2f2f2] border border-black black-shadow w-[500px] flex flex-col items-center justify-around relative gap-10 p-5">
+            <div>
+              <h2 className="madimi-one-regular text-2xl">LOGGED IN AS</h2>
+              <div
+                className="bg-white px-2 py-1 border border-black black-shadow mt-2"
+                onClick={() => console.log(orders)}
+              >
+                {user?.email}
+              </div>
+            </div>
+            {orders.length > 0 ? (
+              <div className="text-center flex flex-col gap-3">
+                <h2 className="madimi-one-regular text-2xl">ORDER HISTORY</h2>
+
+                {orders.map((order) => (
+                  <RenderOrder order={order} />
+                ))}
+              </div>
+            ) : (
+              ""
+            )}
+
             <button
               className="bg-white px-2 py-1 border border-black black-shadow mt-2"
               onClick={handleLogoutClick}

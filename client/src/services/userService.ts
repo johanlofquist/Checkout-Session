@@ -1,4 +1,5 @@
 import { IUser } from "../models/User"
+import { ILoggedInUser } from "../models/loggedInUser"
 import { get, post } from "./serviceBase"
 
 export const saveUser = async (user: IUser) => {
@@ -18,7 +19,7 @@ export const login = async (user: IUser) => {
   }
 
 export const authorize = async () => {
-    const response = await get(
+    const response = await get<ILoggedInUser>(
       "http://localhost:3000/api/auth/authorize"
     )
     return response

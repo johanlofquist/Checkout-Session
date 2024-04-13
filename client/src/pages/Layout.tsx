@@ -13,7 +13,8 @@ export const Layout = () => {
       const response = await authorize();
       if (response.status === 200) {
         const sessionUser = {
-          email: response.data as string,
+          email: response.data.email,
+          stripeId: response.data.stripeId,
         };
         setLoggedInUser(sessionUser);
       }
