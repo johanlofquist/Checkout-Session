@@ -31,11 +31,11 @@ const login = async (req, res) => {
   const { password } = req.body;
   const userExists = await checkIfUserExists(req.body);
   if (!userExists) {
-    return res.status(400).json("This user doesn't exist");
+    return res.status(201).json("This user doesn't exist");
   }
 
   if (!(await bcrypt.compare(password, userExists.password))) {
-    return res.status(400).json("Wrong password");
+    return res.status(201).json("Wrong password");
   }
 
   req.session.user = userExists;

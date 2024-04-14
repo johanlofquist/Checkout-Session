@@ -7,6 +7,7 @@ import { checkout } from "../services/stripeService";
 import postnord from "../assets/postnord.webp";
 import { ChangeEvent, useState } from "react";
 import { findServiceCenter } from "../services/postNordService";
+import { ServiceCenter } from "../models/ServiceCenter";
 
 interface ICart {
   toggleCart: () => void;
@@ -16,22 +17,32 @@ export const Cart = (props: ICart) => {
   const { cart, totalPrice } = useCart();
   const { isLoggedIn, user } = useUser();
   const [postalCodeInput, setPostalCodeInput] = useState("");
-  const [serviceCenters, setServiceCenter] = useState();
+  const [serviceCenters, setServiceCenter] = useState<ServiceCenter[]>([]);
+  const [chosenServicePoint, setChosenServicePoint] = useState<string>("");
+  const [inputPlaceholder, setInputPlaceholder] = useState("Postalcode");
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPostalCodeInput(e.target.value);
   };
 
   const handleClick = async () => {
-    console.log(postalCodeInput);
-    let serviceCenters = await findServiceCenter(postalCodeInput);
-    setServiceCenter(serviceCenters);
+    let serviceCentersList = await findServiceCenter(postalCodeInput);
+    setServiceCenter(serviceCentersList);
+    setChosenServicePoint(serviceCentersList[0].servicePointId);
   };
 
   const handleCheckout = async () => {
-    const response = await checkout(cart, user?.stripeId);
-    localStorage.setItem("sessionId", JSON.stringify(response.sessionId));
-    window.location = response.url;
+    if (chosenServicePoint === "") {
+      setInputPlaceholder("Please enter your postalcode");
+    } else {
+      const response = await checkout(cart, user?.stripeId, chosenServicePoint);
+      localStorage.setItem("sessionId", JSON.stringify(response.sessionId));
+      window.location = response.url;
+    }
+  };
+
+  const handleServicePointChange = (e: HTMLSelectElement) => {
+    setChosenServicePoint(e.value);
   };
   return (
     <motion.div
@@ -59,7 +70,7 @@ export const Cart = (props: ICart) => {
                 <div className="flex gap-2">
                   <input
                     type="text"
-                    placeholder="Postalcode"
+                    placeholder={inputPlaceholder}
                     className="border border-black p-2"
                     value={postalCodeInput}
                     onChange={handleInputChange}
@@ -70,6 +81,20 @@ export const Cart = (props: ICart) => {
                   >
                     Find
                   </button>
+                </div>
+                <div>
+                  <select
+                    className="p-2 border border-black"
+                    onChange={() => handleServicePointChange}
+                  >
+                    {serviceCenters.length > 0
+                      ? serviceCenters.map((center) => (
+                          <option value={center.servicePointId}>
+                            {center.name}
+                          </option>
+                        ))
+                      : ""}
+                  </select>
                 </div>
               </div>
               <button

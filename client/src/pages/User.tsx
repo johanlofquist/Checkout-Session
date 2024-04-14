@@ -18,10 +18,9 @@ export const SignIn = () => {
   const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (user) {
       const fetchOrders = async () => {
         const response = await getOrders(user.email);
-        console.log(response);
         setOrders(response);
       };
       fetchOrders();
@@ -70,7 +69,7 @@ export const SignIn = () => {
     };
 
     const response = await login(user);
-    if (response.status === 400) {
+    if (response.status === 201) {
       setLoginAlert(response.data as string);
     }
     if (response.status === 200) {

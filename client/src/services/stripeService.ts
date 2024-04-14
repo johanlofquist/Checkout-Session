@@ -11,10 +11,11 @@ export const getProducts = async () => {
     return response.data
   }
 
-export const checkout = async (cart: ICartItem[], stripeId: string | undefined) => {
+export const checkout = async (cart: ICartItem[], stripeId: string | undefined, servicePoint: string) => {
     const checkoutBody = {
       cart,
-      stripeId
+      stripeId,
+      servicePoint
     }
     const response = await post<CheckoutResponse>(
       "http://localhost:3000/api/stripe/checkout",

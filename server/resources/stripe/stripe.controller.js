@@ -20,6 +20,9 @@ const createCustomerInStripe = async (email) => {
 const createCheckoutSession = async (req, res) => {
   const cart = req.body.cart;
   const session = await stripe.checkout.sessions.create({
+    metadata: {
+      servicePointId: req.body.servicePoint,
+    },
     allow_promotion_codes: true,
     mode: "payment",
     customer: req.body.stripeId,
@@ -50,6 +53,7 @@ const verifySession = async (req, res) => {
       products: lineItems.data,
       total: session.amount_total,
       date: new Date(),
+      servicePoint: session.metadata.servicePointId,
     };
 
     const orders = JSON.parse(await fs.readFile("./data/orders.json"));
