@@ -96,7 +96,7 @@ export const SignIn = () => {
                 <h2 className="madimi-one-regular text-2xl">ORDER HISTORY</h2>
 
                 {orders.map((order) => (
-                  <RenderOrder order={order} />
+                  <RenderOrder order={order} key={order.orderNumber}/>
                 ))}
               </div>
             ) : (

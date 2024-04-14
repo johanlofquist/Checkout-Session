@@ -8,5 +8,10 @@
     "email": "josefine@gmail.com",
     "password": "$2b$10$mtzmSSuRMkWBiml1a9ZdNOvG53I7geFj99mysSQVSMyfrx.dclI1y",
     "stripeId": "cus_PtWBzio7HUvAtA"
+  },
+  {
+    "email": "stefan@gmail.com",
+    "password": "$2b$10$OPKzMXEdQGkW9NO5SIrgeutmZ6yb.6qeRg/PSwz/GIJkY9xmKEsoK",
+    "stripeId": "cus_PvK48O9BOtqdry"
   }
 ]
