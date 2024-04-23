@@ -71,3 +71,5 @@ Ordern skall som minst innehålla information om ordernummer, datum, kund, produ
 4. Innan man betalar behöver användaren fylla i sin adress och utifrån adressen välja ett utlämningsställe där paketet skall hämtas (PostNord API).
 
 #### _Uppfyllda krav väl godkänt: 1-4_
+
+Jonas och Johan testar
